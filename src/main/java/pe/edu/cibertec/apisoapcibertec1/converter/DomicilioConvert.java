@@ -1,11 +1,13 @@
 package pe.edu.cibertec.apisoapcibertec1.converter;
 
+import org.springframework.stereotype.Component;
 import pe.edu.cibertec.apisoapcibertec1.model.Domicilio;
 import pe.edu.cibertec.ws.objects.Domiciliows;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DomicilioConvert {
 
     public Domicilio convertDomicilioWsToDomicilio(Domiciliows domiciliows){
