@@ -37,7 +37,7 @@ public class DomicilioConvert {
     }
 
     public List<Domiciliows> convertDomicilioToDomicilioWs(List<Domicilio> domicilioList){
-        List<Domiciliows> domiciliowsList = new ArrayList<>();
+        List<Domiciliows> domiciliowsList= new ArrayList<>();
         for (Domicilio domicilio: domicilioList){
             domiciliowsList.add(convertDomicilioToDomicilioWs(domicilio));
         }

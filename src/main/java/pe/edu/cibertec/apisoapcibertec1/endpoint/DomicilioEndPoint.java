@@ -7,10 +7,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import pe.edu.cibertec.apisoapcibertec1.converter.DomicilioConvert;
 import pe.edu.cibertec.apisoapcibertec1.repository.DomicilioRepository;
-import pe.edu.cibertec.ws.objects.Domiciliows;
-import pe.edu.cibertec.ws.objects.GetDomicilioResponse;
-import pe.edu.cibertec.ws.objects.GetDomiciliosRequest;
-import pe.edu.cibertec.ws.objects.GetDomiciliosResponse;
+import pe.edu.cibertec.ws.objects.*;
 
 import java.util.List;
 
@@ -25,12 +22,30 @@ public class DomicilioEndPoint {
     @Autowired
     private DomicilioConvert domicilioConvert;
 
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getDomiciliosRequest")
     @ResponsePayload
-    public GetDomiciliosResponse getDomicilios(@RequestPayload GetDomiciliosRequest request){
+    public GetDomiciliosResponse getDomicilios(@RequestPayload
+                                               GetDomiciliosRequest request){
         GetDomiciliosResponse response = new GetDomiciliosResponse();
-        List<Domiciliows> domiciliowsList = domicilioConvert.convertDomicilioToDomicilioWs(domicilioRepository.findAll());
+        List<Domiciliows> domiciliowsList = domicilioConvert
+                .convertDomicilioToDomicilioWs(domicilioRepository.findAll());
         response.getDomicilios().addAll(domiciliowsList);
         return response;
     }
+
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getDomicilioRequest")
+    @ResponsePayload
+    public GetDomicilioResponse getDomiciliosXId(@RequestPayload
+                                                 GetDomicilioRequest request){
+        GetDomicilioResponse response = new GetDomicilioResponse();
+        Domiciliows domiciliows = domicilioConvert
+                .convertDomicilioToDomicilioWs(
+                        domicilioRepository.findById(request.getId()).get());
+        response.setDomicilio(domiciliows);
+        return response;
+    }
+
+
 }
